@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="Pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies</title>
+    <link rel="stylesheet" href="/main/css/stylesheet.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="header-logo">
+                <ion-icon class="header-logo-icon" name="play-circle-sharp"></ion-icon><h2>Movies</h2>
+            </div>
+            <nav class="nav-itens" >
+                <ul>
+                    <li>Filmes</li>
+                    <li>Séries</li>
+                    <li>Desenhos</li>
+                </ul>
+            </nav>
+            <form class="form-search">
+                <label class="search-container" for="search"> <ion-icon class="search-icon" name="search"></ion-icon> <input type="text" class="search-input" id="search" placeholder="Buscar por filmes, séries e desenhos"></label>
+            </form>
+            <div class="button-container ">
+                <button class="login-button" style="margin-right: 10px;" >Login</button>
+                <button class="cria-conta-button">Cria conta </button>
+            </div>
+        </div>
+    </header>   
+
+    <main>
+        <section class="hero-section">
+            <div class="bg-hero">
+                <div class="hero-content">
+                    <h1 class="hero-title">Round 6</h1>
+                    <p class="hero-description">Um grupo de pessoas passando por dificuldades financeiras aceita um estranho convite para um jogo de sobrevivência. Um prêmio bilionário os aguarda, mas as apostas são altas e mortais.</p>
+                    
+                    <div class="hero-info">
+                        <span>Série</span>
+                        <span>2 Temporadas</span>
+                        <span><ion-icon class="star-icon" name="star"></ion-icon> 4.5</span>
+                    </div>
+                    <div class="hero-buttons-container">
+                        <button class="hero-button"><ion-icon class="hero-button-icon" name="play"></ion-icon > play</button>
+                        <button class="hero-button " id="Details">Detalhes</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="movies-recomendados">
+                <h2>Recomendados</h2>
+                <div class="card-control">
+
+                    <div class="movie-card">
+                        <div class="movie-img">
+
+                            <img src="/main/img/deadpool.jpg" alt="capa do filme">
+                        </div> 
+                        <div class="movie-title">
+                            <h3>DeadPool</h3>
+                            <ion-icon class="movie-card-icon" name="heart-outline"></ion-icon>
+                        </div>  
+                        <div class="movie-info">
+                            <span>2002</span>
+                            <span><ion-icon class="star-icon" name="star"></ion-icon> 4.5</span>
+                        </div>  
+                    </div>
+
+                    <div class="movie-card">
+                        <div class="movie-img">
+                            <img src="/main/img/deadpool.jpg" alt="capa do filme">
+                        </div> 
+                        <div class="movie-title">
+                            <h3>DeadPool</h3>
+                            <ion-icon class="movie-card-icon" name="heart-outline"></ion-icon>
+                        </div>  
+                        <div class="movie-info">
+                            <span>2002</span>
+                            <span><ion-icon class="star-icon" name="star"></ion-icon> 4.5</span>
+                            <span>2.20h</span>
+
+                        </div>  
+                    </div>
+
+                    <div class="movie-card">
+                        <div class="movie-img">
+
+                            <img src="/main/img/deadpool.jpg" alt="capa do filme">
+                        </div> 
+                        <div class="movie-title">
+                            <h3>DeadPool</h3>
+                            <ion-icon class="movie-card-icon" name="heart-outline"></ion-icon>
+                        </div>  
+                        <div class="movie-info">
+                            <span>2002</span>
+                            <span><ion-icon class="star-icon" name="star"></ion-icon> 4.5</span>
+                        </div>  
+                    </div>
+
+                    <div class="movie-card">
+                        <div class="movie-img">
+
+                            <img src="/main/img/deadpool.jpg" alt="capa do filme">
+                        </div> 
+                        <div class="movie-title">
+                            <h3>DeadPool</h3>
+                            <ion-icon class="movie-card-icon" name="heart-outline"></ion-icon>
+                        </div>  
+                        <div class="movie-info">
+                            <span>2002</span>
+                            <span><ion-icon class="star-icon" name="star"></ion-icon> 4.5</span>
+                        </div>  
+                    </div>
+
+                    <div class="movie-card">
+                        <div class="movie-img">
+
+                            <img src="/main/img/deadpool.jpg" alt="capa do filme">
+                        </div> 
+                        <div class="movie-title">
+                            <h3>DeadPool</h3>
+                            <ion-icon class="movie-card-icon" name="heart-outline"></ion-icon>
+                        </div>  
+                        <div class="movie-info">
+                            <span>2002</span>
+                            <span><ion-icon class="star-icon" name="star"></ion-icon> 4.5</span>
+                        </div>  
+                    </div>
+
+                    <div class="movie-card">
+                        <div class="movie-img">
+
+                            <img src="/main/img/deadpool.jpg" alt="capa do filme">
+                        </div> 
+                        <div class="movie-title">
+                            <h3>DeadPool</h3>
+                            <ion-icon class="movie-card-icon" name="heart-outline"></ion-icon>
+                        </div>  
+                        <div class="movie-info">
+                            <span>2002</span>
+                            <span><ion-icon class="star-icon" name="star"></ion-icon> 4.5</span>
+                        </div>  
+                    </div>
+
+                    
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+
+
+
+
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="/main/js/script.js"></script>
+</body>
+</html>
