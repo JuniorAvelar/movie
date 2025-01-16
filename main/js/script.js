@@ -1,6 +1,9 @@
 
 const inputSearch = document.querySelector(".search-input")
 const formSearch = document.querySelector(".form-search")
+const cardControl = document.querySelector(".card-control")
+
+const baseURL = "https://image.tmdb.org/t/p/w780"
 
 
 // função 
@@ -64,11 +67,16 @@ const renderMovies = async () => {
 
         const img = document.createElement("img")
         divImg.appendChild(img)
+        img.src = baseURL + filme.backdrop_path
         
         // div title
         const divTitle = document.createElement("div")
-        const h3Title = document.createElement("h2")
+        divTitle.classList.add("movie-title")
+        const h3Title = document.createElement("h3")
+        h3Title.innerText = filme.title
         const icon = `<span><ion-icon class="star-icon" name="star"></ion-icon> 4.5</span>`
+
+        divTitle.appendChild(h3Title)
 
         // div movi-info
         const divInfo = document.createElement("div")
@@ -76,8 +84,15 @@ const renderMovies = async () => {
         const spanInfo = document.createElement("span")
         const infoIcon = `span><ion-icon class="star-icon" name="star"></ion-icon> 4.5</span>`
         divInfo.appendChild(spanInfo)
-        divInfo.innerHTML = infoIcon
-        console.log(divInfo)
+
+
+        div.appendChild(divImg)
+        div.appendChild(divTitle)
+        div.appendChild(divInfo)
+
+        cardControl.appendChild(div)
+
+        console.log(div)
         
     });
 }
@@ -94,5 +109,5 @@ formSearch.addEventListener("submit" , (e) => {
     e.preventDefault()
     const inputValue = inputSearch.value
 
-    getMovieName(inputValue)
+    fetchMoviesAndSeries(inputValue)
 })  

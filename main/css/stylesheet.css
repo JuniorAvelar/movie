@@ -171,8 +171,8 @@ header {
     display: flex;
     align-items: center;
     gap: 18px;
-
 }
+
 .hero-info span {
     color: #a09d9d;
     font-size: 14px;
@@ -228,7 +228,7 @@ header {
 .movies-recomendados {
     padding-inline: 35px;
 
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .movies-recomendados h2 {
@@ -237,11 +237,14 @@ header {
 
 .card-control {
     display: flex;
-    gap: 20px;  
+    align-items: center;
+    justify-content: center;
     padding: 20px;
+    gap: 18px;
 
+    flex-wrap: wrap;
+    /* overflow: hidden; */
     /* background: #000; */
-    overflow: hidden;
 }
 
 .movie-card {
@@ -249,23 +252,28 @@ header {
 }
 
 .movie-img {
-    width: 250px;
+    width: 200px;
+    height: 300px;
     border-radius: 30px;
     position: relative;
+
+    background-size: cover;
 }
 
 .movie-img img {
     width: 100%;
+    height: 100%;
     border-radius: 30px;
     transition: linear;
+    object-fit: cover;
 }
 
 .movie-img:hover::before{
    content: "";
    width: 100%;
-   height: 99%;
+   height: 100%;
 
-   background-color: #0000005c;
+   background-color: #0000008c;
    position: absolute;
    border-radius: 30px;
    
@@ -277,7 +285,7 @@ header {
     justify-content: space-between;
     padding-inline: 10px;
     margin-top: 8px;
-    width: 250px;   
+    width: 200px;   
 }
 
 .movie-img:hover ~ .movie-title h3 {
@@ -288,7 +296,7 @@ header {
 
 .movie-title h3 {
     color: #fff;
-    font-size: 28px;
+    font-size: 18px;
     font-weight: bold;
 }
 
