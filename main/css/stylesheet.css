@@ -227,8 +227,6 @@ header {
 
 .movies-recomendados {
     padding-inline: 35px;
-
-    /* overflow: hidden; */
 }
 
 .movies-recomendados h2 {
@@ -237,14 +235,13 @@ header {
 
 .card-control {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: center; 
+    justify-content: center; 
     padding: 20px;
-    gap: 18px;
+    gap: 24px;
 
     flex-wrap: wrap;
-    /* overflow: hidden; */
-    /* background: #000; */
+    overflow:hidden ;
 }
 
 .movie-card {
@@ -256,8 +253,6 @@ header {
     height: 300px;
     border-radius: 30px;
     position: relative;
-
-    background-size: cover;
 }
 
 .movie-img img {
@@ -285,10 +280,9 @@ header {
     margin-top: 8px;
     max-width: 200px; 
 
-    max-height: 1.4em; /* Limita a 1 linhas */
-    overflow: hidden;  
-    display: -webkit-box;
-    gap: 5rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;    
 }
 
 .movie-img:hover ~ .movie-title h3 {
@@ -332,6 +326,13 @@ header {
     gap: 18px;
     padding-inline: 10px;
     font-size: 12px;
+}
+
+.span-info {
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
 }
 
 

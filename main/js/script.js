@@ -74,16 +74,32 @@ const renderMovies = async () => {
         divTitle.classList.add("movie-title")
         const h3Title = document.createElement("h3")
         h3Title.innerText = filme.title
-        const icon = `<span><ion-icon class="star-icon" name="star"></ion-icon> 4.5</span>`
+        const spanIcon =  document.createElement("span")
+        // spanIcon.innerHTML = `<ion-icon class="movie-card-icon" name="heart-outline"></ion-icon>`
 
         divTitle.appendChild(h3Title)
+        // divTitle.appendChild(spanIcon)
 
         // div movi-info
         const divInfo = document.createElement("div")
         divInfo.classList.add("movie-info")
+
         const spanInfo = document.createElement("span")
-        const infoIcon = `span><ion-icon class="star-icon" name="star"></ion-icon> 4.5</span>`
+        spanInfo.textContent = filme.
+        release_date
+
+        const infoIcon = document.createElement("span")
+        infoIcon.classList.add("span-info")
+        infoIcon.innerHTML = '<ion-icon class="star-icon" name="star"></ion-icon>'
+
+        const avSpan = document.createElement("span")
+        avSpan.textContent = filme.vote_average
+
+
         divInfo.appendChild(spanInfo)
+        divInfo.appendChild(infoIcon)
+        infoIcon.appendChild(avSpan)
+
 
 
         div.appendChild(divImg)
