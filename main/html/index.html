@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movies</title>
-    <link rel="stylesheet" href="/main/css/stylesheet.css">
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"/> <!-- swiper.js -->
+    <link rel="stylesheet" href="/main/css/stylesheet.css"> 
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script> <!-- axios -->
 </head>
 <body>
     <header>
@@ -53,22 +54,26 @@
         <section>
             <div class="movies-recomendados">
                 <h2>Populares</h2>
-                <div class="card-control">
-                    <div class="movie-card">
-                        <div class="movie-img">
-                            <img src="/main/img/deadpool.jpg" alt="capa do filme">
-                        </div> 
-                        <div class="movie-title">
-                            <h3>DeadPool</h3>
-                            <!-- <ion-icon class="movie-card-icon" name="heart-outline"></ion-icon> -->
+                <div class="card-control mySwiper">
+                    <div class="swiper-wrapper">
+                        <div class="movie-card">
+                            <div class="movie-img">
+                                <img src="/main/img/deadpool.jpg" alt="capa do filme">
+                            </div> 
+                            <div class="movie-title">
+                                <h3>DeadPool</h3>
+                                <!-- <ion-icon class="movie-card-icon" name="heart-outline"></ion-icon> -->
+                            </div>  
+                            <div class="movie-info">
+                                <span>2002</span>
+                                <span class="span-info"><ion-icon class="star-icon" name="star"></ion-icon> <span>4.5</span> </span>
+                                <span>2.20h</span>
+                            </div>  
                         </div>  
-                        <div class="movie-info">
-                            <span>2002</span>
-                            <span class="span-info"><ion-icon class="star-icon" name="star"></ion-icon> <span>4.5</span> </span>
-                            <span>2.20h</span>
 
-                        </div>  
-                    </div>          
+                    </div>
+                      
+                    <!-- <div class="swiper-pagination"></div>       -->
                 </div>
             </div>
         </section>
@@ -81,6 +86,7 @@
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
     <script src="/main/js/script.js"></script>
 </body>
 </html>

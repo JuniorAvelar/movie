@@ -225,12 +225,9 @@ header {
 
 /* movies-recomendados */
 
-.movies-recomendados {
-    padding-inline: 35px;
-}
-
 .movies-recomendados h2 {
     color: #fff;
+    margin-left: 5rem;
 }
 
 .card-control {
@@ -241,7 +238,7 @@ header {
     gap: 24px;
 
     flex-wrap: wrap;
-    overflow:hidden ;
+    overflow:hidden; 
 }
 
 .movie-card {
@@ -288,7 +285,6 @@ header {
 .movie-img:hover ~ .movie-title h3 {
     color: #141212;
     transition: linear ;
-
 }
 
 .movie-title h3 {
@@ -334,11 +330,6 @@ header {
     justify-content: center;
     gap: 5px;
 }
-
-
-  
-
-
 
 
 
