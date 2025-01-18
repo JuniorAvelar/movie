@@ -51,11 +51,9 @@ const renderMovies = async () => {
     const data = await fetchMoviesPopulares()
 
     data.forEach(filme => {
-        console.log(filme.title)
-        console.log(filme.backdrop_path)
-        console.log(filme.vote_average)
-        console.log(filme.poster_path)
-        
+        const movieTitle = filme.title
+        const movieImg = filme.poster_path
+        const movieQualification = filme.vote_average        
         
         // div img-card
         const div = document.createElement("div")
@@ -67,7 +65,7 @@ const renderMovies = async () => {
 
         const img = document.createElement("img")
         divImg.appendChild(img)
-        img.src = baseURL + filme.backdrop_path
+        img.src = baseURL + filme.poster_path
         
         // div title
         const divTitle = document.createElement("div")
@@ -115,8 +113,6 @@ const renderMovies = async () => {
 
 fetchMoviesPopulares()
 renderMovies()
-
-
 
 
 // eventos
