@@ -27,9 +27,6 @@ const fetchMoviesAndSeries = async (MovieName) => {
             tmdbApi.get('search/tv' , {params: {query: MovieName }})
         ])
 
-        console.log("filmes: " , filme.data.results)
-        console.log("series:" , serie.data.results)
-
     } catch (error) {
         console.log("filme não encontrado" + error)
     }
@@ -38,15 +35,28 @@ const fetchMoviesAndSeries = async (MovieName) => {
 // busca por filmes populares 
 const fetchMoviesPopulares = async () => {
     try{
-        const response = await tmdbApi.get('/movie/popular')
-        console.log("populares" , response.data.results)
-        return response.data.results
-    } catch (error) {
 
-        console.log("nenhum filme popular encontrado")
+        const response = await tmdbApi.get('/movie/popular')
+        return response.data.results
+
+    } catch (erro) {
+        console.log("nenhum filme popular encontrado" , erro)
     }
 
 }
+
+// busca por séries populares 
+const fetchSeriesPopulare = async () => {
+    try {  
+        const response =  await tmdbApi.get('/tv/popular')
+        console.log(response.data.results)
+        return response.data.results
+    } catch(erro) {
+        console.log("nenhum série popular encontrado" , erro)
+    }
+}
+
+fetchSeriesPopulare()
 
 const renderMovies = async () => {
     const data = await fetchMoviesPopulares()
@@ -105,16 +115,19 @@ const renderMovies = async () => {
         swiperWrapper.appendChild(div)
         cardControl.appendChild(swiperWrapper)
 
-        swiper.update();
-        console.log(cardControl)
-        
+        swiper.update(); 
     });
 }
 
+const renderSeries = async () => {
+    const  data = await fetchSeriesPopulare()
+    
+}
+
 const swiper = new Swiper(".mySwiper", {
-    slidesPerView: 6,
-    spaceBetween: 30,
-    freeMode: false,
+    slidesPerView: "auto", // Número de slides visíveis
+    spaceBetween: 18,  // Espaçamento entre os slides
+    freeMode: true,   // movimento livre
     centerInsufficientSlides: true,
     pagination: {
       el: null,

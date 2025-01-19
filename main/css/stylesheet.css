@@ -227,16 +227,19 @@ header {
 
 .movies-recomendados h2 {
     color: #fff;
-    margin-left: 5rem;
+    margin-left: 22px;
+    font-size: 28px;
+    font-weight: bold;
 }
 
 .card-control {
     display: flex;
     align-items: center; 
     justify-content: center; 
-    padding: 20px;
     gap: 24px;
 
+    max-width: 1440px;
+    margin: 0 auto;
     flex-wrap: wrap;
     overflow:hidden; 
 }
