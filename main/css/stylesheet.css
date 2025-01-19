@@ -241,8 +241,11 @@ header {
     overflow:hidden; 
 }
 
+
 .movie-card {
+    width: 200px;
     cursor: pointer;
+    flex: 1;
 }
 
 .movie-img {

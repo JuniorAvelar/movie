@@ -112,12 +112,13 @@ const renderMovies = async () => {
 }
 
 const swiper = new Swiper(".mySwiper", {
-    slidesPerView: 3,
+    slidesPerView: 6,
     spaceBetween: 30,
-    freeMode: true,
+    freeMode: false,
+    centerInsufficientSlides: true,
     pagination: {
-      el: ".swiper-pagination",
-      clickable: true,
+      el: null,
+      clickable: false,
     },
   });
 
