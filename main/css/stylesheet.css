@@ -225,14 +225,19 @@ header {
 
 /* movies-recomendados */
 
+.movies-recomendados  {
+    margin-bottom: 5rem;
+}
+
 .movies-recomendados h2 {
     color: #fff;
     margin-left: 22px;
     font-size: 28px;
     font-weight: bold;
+
 }
 
-.card-control {
+.card-control,.card-control-series {
     display: flex;
     align-items: center; 
     justify-content: center; 
@@ -242,6 +247,8 @@ header {
     margin: 0 auto;
     flex-wrap: wrap;
     overflow:hidden; 
+
+    background: #000;
 }
 
 

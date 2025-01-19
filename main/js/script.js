@@ -2,7 +2,10 @@
 const inputSearch = document.querySelector(".search-input")
 const formSearch = document.querySelector(".form-search")
 const cardControl = document.querySelector(".card-control")
+const cardControlSeries = document.querySelector(".card-control-series")
 const swiperWrapper = document.querySelector(".swiper-wrapper")
+const swiperWrapperSeries = document.querySelector(".swiper-wrapper-series")
+
 
 const baseURL = "https://image.tmdb.org/t/p/w780"
 
@@ -35,8 +38,9 @@ const fetchMoviesAndSeries = async (MovieName) => {
 // busca por filmes populares 
 const fetchMoviesPopulares = async () => {
     try{
-
+        // GET /genre/movie/list
         const response = await tmdbApi.get('/movie/popular')
+        console.log(response.data.results)
         return response.data.results
 
     } catch (erro) {
@@ -45,18 +49,30 @@ const fetchMoviesPopulares = async () => {
 
 }
 
+fetchMoviesPopulares()
+
+const fetchMoviesGenre = async () => {
+    try{
+        // GET /genre/movie/list
+        const response = await tmdbApi.get('/genre/movie/list')
+        console.log(response.data.genres)
+        return response.data.genres
+
+    } catch (erro) {
+        console.log("" , erro)
+    }
+}
+
+
 // busca por séries populares 
 const fetchSeriesPopulare = async () => {
     try {  
         const response =  await tmdbApi.get('/tv/popular')
-        console.log(response.data.results)
         return response.data.results
     } catch(erro) {
         console.log("nenhum série popular encontrado" , erro)
     }
 }
-
-fetchSeriesPopulare()
 
 const renderMovies = async () => {
     const data = await fetchMoviesPopulares()
@@ -92,18 +108,18 @@ const renderMovies = async () => {
         const divInfo = document.createElement("div")
         divInfo.classList.add("movie-info")
 
-        const spanInfo = document.createElement("span")
-        spanInfo.textContent = movieData
+        const spandata = document.createElement("span")
+        spandata.textContent = movieData.split("-")[0]
 
         const infoIcon = document.createElement("span")
         infoIcon.classList.add("span-info")
         infoIcon.innerHTML = '<ion-icon class="star-icon" name="star"></ion-icon>'
 
         const avSpan = document.createElement("span")
-        avSpan.textContent = movieQualification
+        avSpan.textContent = movieQualification.toFixed(1)
 
 
-        divInfo.appendChild(spanInfo)
+        divInfo.appendChild(spandata)
         divInfo.appendChild(infoIcon)
         infoIcon.appendChild(avSpan)
 
@@ -114,15 +130,64 @@ const renderMovies = async () => {
 
         swiperWrapper.appendChild(div)
         cardControl.appendChild(swiperWrapper)
-
-        swiper.update(); 
+ 
     });
+    swiper.update();
 }
 
 const renderSeries = async () => {
-    const  data = await fetchSeriesPopulare()
-    
+    const data = await fetchSeriesPopulare();
+
+    data.forEach(serie => {
+        const div = document.createElement("div");
+        div.classList.add("movie-card", "swiper-slide");
+
+        const divImg = document.createElement("div");
+        divImg.classList.add("movie-img");
+        const img = document.createElement("img");
+        img.src = baseURL + serie.poster_path;
+        divImg.appendChild(img);
+
+        const divTitle = document.createElement("div");
+        divTitle.classList.add("movie-title");
+        const h3 = document.createElement("h3");
+        h3.textContent = serie.name;
+        divTitle.appendChild(h3);
+
+        const divInfo = document.createElement("div");
+        divInfo.classList.add("movie-info");
+        const spanDate = document.createElement("span");
+        spanDate.textContent = serie.first_air_date.split("-")[0];
+        const spanInfo = document.createElement("span");
+        spanInfo.classList.add("span-info");
+        spanInfo.innerHTML = `<ion-icon class="star-icon" name="star"></ion-icon>`;
+        const spanVote = document.createElement("span");
+        spanVote.textContent = serie.vote_average.toFixed(1);
+        spanInfo.appendChild(spanVote);
+        divInfo.appendChild(spanDate);
+        divInfo.appendChild(spanInfo);
+
+        div.appendChild(divImg);
+        div.appendChild(divTitle);
+        div.appendChild(divInfo);
+
+        swiperWrapperSeries.appendChild(div);
+    });
+
+    swiperSeries.update();
+};
+
+
+const filter = async ( ) => {
+    const data = await fetchMoviesPopulares()
+    data.forEach((item) => {
+        if (item.genre_ids.includes(16)) {
+            console.log(item.title)
+        }
+    })
 }
+
+filter()
 
 const swiper = new Swiper(".mySwiper", {
     slidesPerView: "auto", // Número de slides visíveis
@@ -135,8 +200,20 @@ const swiper = new Swiper(".mySwiper", {
     },
   });
 
-fetchMoviesPopulares()
+  const swiperSeries = new Swiper(".mySwiper-series", {
+    slidesPerView: "auto", // Número de slides visíveis
+    spaceBetween: 18,  // Espaçamento entre os slides
+    freeMode: true,   // movimento livre
+    centerInsufficientSlides: true,
+    pagination: {
+      el: null,
+      clickable: false,
+    },
+  });
+
 renderMovies()
+renderSeries()
+
 
 
 // eventos
