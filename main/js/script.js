@@ -64,6 +64,7 @@ const fetchMoviesGenre = async () => {
 }
 
 
+
 // busca por séries populares 
 const fetchSeriesPopulare = async () => {
     try {  
@@ -224,3 +225,19 @@ formSearch.addEventListener("submit" , (e) => {
 
     fetchMoviesAndSeries(inputValue)
 })  
+
+inputSearch.addEventListener("keyup" ,() => {
+
+    if(inputSearch.value.length > 3 ) {
+        document.querySelector(".modal-seach").classList.remove("hidden")
+    }
+
+    if(inputSearch.value.length == 0 ) {
+        document.querySelector(".modal-seach").classList.add("hidden")
+    }
+
+})
+
+inputSearch.addEventListener("blur" ,() => {
+    document.querySelector(".modal-seach").classList.add("hidden")
+})

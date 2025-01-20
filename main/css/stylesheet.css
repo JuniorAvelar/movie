@@ -74,6 +74,8 @@ header {
     border-radius: 80px;
     background-color: #fff;
     padding-inline: 8px;
+
+    position: relative;
 }
 
 .search-container input {
@@ -87,6 +89,21 @@ header {
 .search-icon {
     font-size: 25px;
     color: #ddd ;
+}
+
+.modal-seach {
+    top: 40px;
+    width: 300px;
+    height: 400px;
+    background-color: #fff;
+    border-radius: 10px;
+
+    position: absolute;
+    margin: 0 auto;
+}
+
+.hidden {
+    display: none;
 }
 
 .login-button {
@@ -248,7 +265,7 @@ header {
     flex-wrap: wrap;
     overflow:hidden; 
 
-    background: #000;
+    /* background: #000; */
 }
 
 
@@ -347,7 +364,7 @@ header {
 
 
 
-
+/* 
 body {
     margin-bottom: 1000PX;
-}
+} */
