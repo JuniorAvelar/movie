@@ -5,6 +5,7 @@ const cardControl = document.querySelector(".card-control")
 const cardControlSeries = document.querySelector(".card-control-series")
 const swiperWrapper = document.querySelector(".swiper-wrapper")
 const swiperWrapperSeries = document.querySelector(".swiper-wrapper-series")
+const modalList = document.querySelector(".list-movies-modal")
 
 
 const baseURL = "https://image.tmdb.org/t/p/w780"
@@ -27,8 +28,15 @@ const fetchMoviesAndSeries = async (MovieName) => {
     try {
         const [filme , serie] = await axios.all([
             tmdbApi.get('search/movie' , { params: {query: MovieName }}),
-            tmdbApi.get('search/tv' , {params: {query: MovieName }})
+            tmdbApi.get('search/tv' , {params: {query: MovieName }})     
         ])
+
+        return {
+            filmes: filme.data.results,
+            serie: serie.data.results
+        }
+        // console.log("filmes:" , filme.data.results) 
+        // console.log("series:" , serie.data.results) 
 
     } catch (error) {
         console.log("filme não encontrado" + error)
@@ -55,7 +63,6 @@ const fetchMoviesGenre = async () => {
     try{
         // GET /genre/movie/list
         const response = await tmdbApi.get('/genre/movie/list')
-        console.log(response.data.genres)
         return response.data.genres
 
     } catch (erro) {
@@ -69,6 +76,7 @@ const fetchMoviesGenre = async () => {
 const fetchSeriesPopulare = async () => {
     try {  
         const response =  await tmdbApi.get('/tv/popular')
+        // console.log(response.data.results)
         return response.data.results
     } catch(erro) {
         console.log("nenhum série popular encontrado" , erro)
@@ -87,6 +95,7 @@ const renderMovies = async () => {
         // div img-card
         const div = document.createElement("div")
         div.classList.add("movie-card" , 'swiper-slide')
+        div.setAttribute("data-id" , filme.genre_ids)
         
         // div img
         const divImg = document.createElement("div")
@@ -142,6 +151,7 @@ const renderSeries = async () => {
     data.forEach(serie => {
         const div = document.createElement("div");
         div.classList.add("movie-card", "swiper-slide");
+        div.setAttribute("data-id", serie.genre_ids)
 
         const divImg = document.createElement("div");
         divImg.classList.add("movie-img");
@@ -164,6 +174,7 @@ const renderSeries = async () => {
         spanInfo.innerHTML = `<ion-icon class="star-icon" name="star"></ion-icon>`;
         const spanVote = document.createElement("span");
         spanVote.textContent = serie.vote_average.toFixed(1);
+
         spanInfo.appendChild(spanVote);
         divInfo.appendChild(spanDate);
         divInfo.appendChild(spanInfo);
@@ -178,6 +189,19 @@ const renderSeries = async () => {
     swiperSeries.update();
 };
 
+const renderModal = async (title) => {
+    const data = await fetchMoviesAndSeries(title)
+    console.log(data.filmes)
+
+      data.filmes.forEach((movie) => {
+        const li = document.createElement("li") 
+        li.innerHTML = `<div class="img-modal"><img src="${baseURL+movie.poster_path}" alt="capa do filme"></div>  <h4>${movie.title}</h4>`
+    
+        modalList.appendChild(li)
+      })
+}
+
+
 
 const filter = async ( ) => {
     const data = await fetchMoviesPopulares()
@@ -188,7 +212,28 @@ const filter = async ( ) => {
     })
 }
 
-filter()
+// const filterEl = ( ) => {
+//     setTimeout(() => {
+//         const moviesEl = document.querySelectorAll(".movie-card")
+//     console.log(moviesEl)
+//     moviesEl.forEach((movie) =>{
+//         if(!movie.getAttribute("data-id").includes(16)){
+//             movie.style.display = "none"
+
+//         }
+
+//         console.log(movie.getAttribute("data-id"))
+//     }) 
+
+//     swiper.update();
+
+//     } ,200)
+
+//     // swiper.update();
+    
+// }
+// filterEl()
+
 
 const swiper = new Swiper(".mySwiper", {
     slidesPerView: "auto", // Número de slides visíveis
@@ -222,22 +267,30 @@ renderSeries()
 formSearch.addEventListener("submit" , (e) => {
     e.preventDefault()
     const inputValue = inputSearch.value
-
-    fetchMoviesAndSeries(inputValue)
+    if(inputValue) {
+    console.log(inputValue)
+    document.querySelector(".list-movies-modal").innerHTML = ""
+     renderModal(inputValue)
+    }
+    else {
+        return
+    }
 })  
 
 inputSearch.addEventListener("keyup" ,() => {
 
     if(inputSearch.value.length > 3 ) {
         document.querySelector(".modal-seach").classList.remove("hidden")
+
     }
 
-    if(inputSearch.value.length == 0 ) {
+    if(inputSearch.value.length == 0) {
         document.querySelector(".modal-seach").classList.add("hidden")
+        document.querySelector(".list-movies-modal").innerHTML = ""
     }
-
 })
 
 inputSearch.addEventListener("blur" ,() => {
     document.querySelector(".modal-seach").classList.add("hidden")
+    document.querySelector(".list-movies-modal").innerHTML = ""
 })
