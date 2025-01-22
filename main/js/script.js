@@ -26,14 +26,14 @@ const tmdbApi = axios.create({
 // function que busca o filme e a série 
 const fetchMoviesAndSeries = async (MovieName) => {
     try {
-        const [filme , serie] = await axios.all([
+        const [filme , series] = await axios.all([
             tmdbApi.get('search/movie' , { params: {query: MovieName }}),
             tmdbApi.get('search/tv' , {params: {query: MovieName }})     
         ])
 
         return {
             filmes: filme.data.results,
-            serie: serie.data.results
+            series: series.data.results
         }
         // console.log("filmes:" , filme.data.results) 
         // console.log("series:" , serie.data.results) 
@@ -48,7 +48,7 @@ const fetchMoviesPopulares = async () => {
     try{
         // GET /genre/movie/list
         const response = await tmdbApi.get('/movie/popular')
-        console.log(response.data.results)
+        // console.log(response.data.results)
         return response.data.results
 
     } catch (erro) {
@@ -69,7 +69,6 @@ const fetchMoviesGenre = async () => {
         console.log("" , erro)
     }
 }
-
 
 
 // busca por séries populares 
@@ -189,19 +188,44 @@ const renderSeries = async () => {
     swiperSeries.update();
 };
 
-const renderModal = async (title) => {
-    const data = await fetchMoviesAndSeries(title)
+const renderModal = async (nameTitle) => {
+    const data = await fetchMoviesAndSeries(nameTitle)
+    const arrMoivesAndSeire = []
+
     console.log(data.filmes)
 
       data.filmes.forEach((movie) => {
-        const li = document.createElement("li") 
-        li.innerHTML = `<div class="img-modal"><img src="${baseURL+movie.poster_path}" alt="capa do filme"></div>  <h4>${movie.title}</h4>`
-    
-        modalList.appendChild(li)
+        arrMoivesAndSeire.push({title:movie.title , urlImg:baseURL+movie.poster_path})
+
       })
+
+      data.series.forEach((serie) => {
+        arrMoivesAndSeire.push({title:serie.name , urlImg:baseURL+serie.poster_path})
+      })
+
+      console.log("old" , arrMoivesAndSeire)
+
+    
+    // Prioriza itens que correspondem exatamente ao título pesquisado
+    const filterArr =  arrMoivesAndSeire.sort((a , b) => {
+        if(a.title.toLowerCase() === nameTitle.toLowerCase()){ return -1}
+        if(b.title.toLowerCase() === nameTitle.toLowerCase()){ return 1}
+        return 0
+      })
+      
+    filterArr.forEach((item) => {
+        const li = document.createElement("li");    
+
+        li.innerHTML = `
+            <div class="img-modal">
+                <img src="${item.urlImg}" alt="Capa do ${item.type}">
+            </div>
+            <h4>${item.title}</h4>
+        `;
+        modalList.appendChild(li);  
+    })
+
 }
-
-
 
 const filter = async ( ) => {
     const data = await fetchMoviesPopulares()
@@ -233,7 +257,6 @@ const filter = async ( ) => {
     
 // }
 // filterEl()
-
 
 const swiper = new Swiper(".mySwiper", {
     slidesPerView: "auto", // Número de slides visíveis
@@ -279,9 +302,12 @@ formSearch.addEventListener("submit" , (e) => {
 
 inputSearch.addEventListener("keyup" ,() => {
 
-    if(inputSearch.value.length > 3 ) {
-        document.querySelector(".modal-seach").classList.remove("hidden")
+    const inputValue = inputSearch.value
 
+    if(inputSearch.value.length > 1 ) {
+        document.querySelector(".modal-seach").classList.remove("hidden")
+        document.querySelector(".list-movies-modal").innerHTML = ""
+        renderModal(inputValue)
     }
 
     if(inputSearch.value.length == 0) {
