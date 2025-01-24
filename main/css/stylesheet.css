@@ -119,6 +119,10 @@ header {
     z-index: -10;
 }
 
+.list-movies-modal li:hover {
+    background-color: #cdcbcb;
+}
+
 .list-movies-modal li > h4{
    margin-left: 10px;
    color: #2d2d2d;
@@ -135,7 +139,8 @@ header {
     object-fit: cover;
 }
 .hidden {
-    display: none;
+    /* display: none; */
+    visibility: hidden;    
 }
 
 .login-button {

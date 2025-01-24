@@ -5,6 +5,7 @@ const cardControl = document.querySelector(".card-control")
 const cardControlSeries = document.querySelector(".card-control-series")
 const swiperWrapper = document.querySelector(".swiper-wrapper")
 const swiperWrapperSeries = document.querySelector(".swiper-wrapper-series")
+const modal = document.querySelector(".modal-seach")
 const modalList = document.querySelector(".list-movies-modal")
 
 
@@ -192,19 +193,12 @@ const renderModal = async (nameTitle) => {
     const data = await fetchMoviesAndSeries(nameTitle)
     const arrMoivesAndSeire = []
 
-    console.log(data.filmes)
-
       data.filmes.forEach((movie) => {
         arrMoivesAndSeire.push({title:movie.title , urlImg:baseURL+movie.poster_path})
-
       })
-
       data.series.forEach((serie) => {
         arrMoivesAndSeire.push({title:serie.name , urlImg:baseURL+serie.poster_path})
       })
-
-      console.log("old" , arrMoivesAndSeire)
-
     
     // Prioriza itens que correspondem exatamente ao título pesquisado
     const filterArr =  arrMoivesAndSeire.sort((a , b) => {
@@ -214,7 +208,8 @@ const renderModal = async (nameTitle) => {
       })
       
     filterArr.forEach((item) => {
-        const li = document.createElement("li");    
+        const li = document.createElement("li"); 
+        li.classList.add("modal-content")   
 
         li.innerHTML = `
             <div class="img-modal">
@@ -317,6 +312,20 @@ inputSearch.addEventListener("keyup" ,() => {
 })
 
 inputSearch.addEventListener("blur" ,() => {
+    if(!inputSearch.value) {
+        document.querySelector(".modal-seach").classList.add("hidden")
+        document.querySelector(".list-movies-modal").innerHTML = ""
+    }
+})
+
+document.addEventListener("click" , (e) => {
+    const mdc = document.querySelector(".modal-content")
+    console.log(modal.contains(mdc))
+    console.log(e.target)
+    
+    if(modal.contains(e.target)) {
+      return
+    }
     document.querySelector(".modal-seach").classList.add("hidden")
     document.querySelector(".list-movies-modal").innerHTML = ""
 })
